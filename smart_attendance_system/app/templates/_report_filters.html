@@ -1,0 +1,32 @@
+<div class="card border-0 shadow-sm rounded-4 mb-4">
+    <div class="card-body">
+        <form method="GET" class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Date</label>
+                <input type="date" name="attendance_date" value="{{ request.args.get('attendance_date', '') }}" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Class</label>
+                <select name="class_id" class="form-select">
+                    <option value="">All Classes</option>
+                    {% for classroom in classes %}
+                    <option value="{{ classroom.id }}" {% if request.args.get('class_id', type=int) == classroom.id %}selected{% endif %}>{{ classroom.display_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Student</label>
+                <select name="student_id" class="form-select">
+                    <option value="">All Students</option>
+                    {% for student in students %}
+                    <option value="{{ student.id }}" {% if request.args.get('student_id', type=int) == student.id %}selected{% endif %}>{{ student.full_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 d-flex gap-2">
+                <button class="btn btn-primary">Apply Filters</button>
+                <a href="{{ request.path }}" class="btn btn-outline-secondary">Reset</a>
+            </div>
+        </form>
+    </div>
+</div>

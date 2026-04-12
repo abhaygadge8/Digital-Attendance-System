@@ -1,0 +1,78 @@
+:root {
+    --bg: #f4f7fb;
+    --ink: #162033;
+    --muted: #697386;
+    --brand: #0f4c81;
+    --brand-soft: #dceeff;
+    --card-shadow: 0 14px 40px rgba(22, 32, 51, 0.08);
+}
+
+body {
+    background: radial-gradient(circle at top right, #d9f0ff 0%, #f4f7fb 38%, #eef2f7 100%);
+    color: var(--ink);
+    min-height: 100vh;
+}
+
+.app-navbar {
+    background: linear-gradient(90deg, #0b2d4a 0%, #0f4c81 100%);
+    box-shadow: 0 8px 20px rgba(15, 76, 129, 0.2);
+}
+
+.hero-card {
+    background: linear-gradient(135deg, rgba(11, 45, 74, 0.95), rgba(15, 76, 129, 0.88));
+    box-shadow: var(--card-shadow);
+}
+
+.info-panel,
+.stat-card,
+.summary-box {
+    background: white;
+    color: var(--ink);
+    box-shadow: var(--card-shadow);
+    border-radius: 1.25rem;
+}
+
+.stat-card {
+    min-height: 140px;
+}
+
+.card,
+.table,
+.form-control,
+.form-select,
+.btn {
+    border-radius: 1rem !important;
+}
+
+.camera-wrapper {
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #edf6ff 0%, #fdfdfd 100%);
+}
+
+#cameraStream {
+    width: 100%;
+    border: 1px solid #d6e4f0;
+}
+
+.status-pill {
+    background: var(--brand-soft);
+    padding: 0.9rem 1rem;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.table thead th {
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+    .hero-card {
+        padding: 2rem !important;
+    }
+}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Classes | Smart Attendance{% endblock %}
+{% block content %}
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body">
+                <h3 class="mb-3">Add Class</h3>
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        {{ form.class_name.label(class="form-label") }}
+                        {{ form.class_name(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.section.label(class="form-label") }}
+                        {{ form.section(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.subject.label(class="form-label") }}
+                        {{ form.subject(class="form-control") }}
+                    </div>
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body">
+                <h3 class="mb-3">Classrooms</h3>
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Section</th>
+                                <th>Subject</th>
+                                <th>Students</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for classroom in classes %}
+                            <tr>
+                                <td>{{ classroom.class_name }}</td>
+                                <td>{{ classroom.section }}</td>
+                                <td>{{ classroom.subject or '-' }}</td>
+                                <td>{{ classroom.students|length }}</td>
+                                <td>
+                                    <form method="POST" action="{{ url_for('main.delete_class', class_id=classroom.id) }}" onsubmit="return confirm('Delete this class?');">
+                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr><td colspan="5" class="text-center text-muted">No classes created yet.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

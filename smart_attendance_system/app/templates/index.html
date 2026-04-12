@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Home | Smart Attendance{% endblock %}
+{% block content %}
+<section class="hero-card p-5 rounded-4 text-white">
+    <div class="row align-items-center">
+        <div class="col-lg-7">
+            <span class="badge bg-light text-dark mb-3">Face Recognition Ready</span>
+            <h1 class="display-5 fw-bold">Cloud-Based Smart Attendance System</h1>
+            <p class="lead mt-3">
+                Register students, capture face data, recognize faces in real time, and manage attendance records through a simple admin panel.
+            </p>
+            <div class="mt-4 d-flex gap-3 flex-wrap">
+                <a href="{{ url_for('auth.login') }}" class="btn btn-warning btn-lg">Admin Login</a>
+                <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-light btn-lg">Open Dashboard</a>
+            </div>
+        </div>
+        <div class="col-lg-5 mt-4 mt-lg-0">
+            <div class="info-panel p-4 rounded-4">
+                <h4>Local First, Cloud Ready</h4>
+                <p class="mb-0">The app uses SQLite for local development but keeps configuration and storage paths environment-driven for future deployment.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

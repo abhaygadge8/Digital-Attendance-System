@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Attendance | Smart Attendance{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <div>
+        <h2 class="mb-1">Attendance Logs</h2>
+        <p class="text-muted mb-0">Filter attendance by class, student, or date.</p>
+    </div>
+    <a href="{{ url_for('attendance_module.camera_page') }}" class="btn btn-primary">Open Recognition Camera</a>
+</div>
+
+{% include "_report_filters.html" %}
+
+<div class="card border-0 shadow-sm rounded-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Confidence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in records %}
+                    <tr>
+                        <td>{{ record.student.student_id }}</td>
+                        <td>{{ record.student.full_name }}</td>
+                        <td>{{ record.classroom.display_name }}</td>
+                        <td>{{ record.attendance_date }}</td>
+                        <td>{{ record.attendance_time.strftime("%H:%M:%S") }}</td>
+                        <td><span class="badge bg-success">{{ record.status }}</span></td>
+                        <td>{{ record.recognized_confidence or '-' }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="7" class="text-center text-muted">No attendance data available.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

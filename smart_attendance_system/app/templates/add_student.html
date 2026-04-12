@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Add Student | Smart Attendance{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body p-4">
+                <h2 class="mb-4">Add Student</h2>
+                {% include "_student_form.html" %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
