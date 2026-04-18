@@ -194,6 +194,65 @@ If you added new student images, run this before starting the app:
 python scripts/generate_encodings.py
 ```
 
+## Deploy On The Web
+
+This project is a server-side Flask app, so putting the code on GitHub is not enough by itself. You need a Python hosting platform such as Render or Railway to get a public link.
+
+This repository now includes a root-level `render.yaml` file for Render deployment.
+
+The included setup uses a persistent disk path for SQLite, uploads, dataset files, and exports so data is not lost on redeploy. On Render, persistent disks require a paid web service. If you remove the disk, the app can still deploy, but local files and SQLite data will be ephemeral.
+
+### Deploy using Render
+
+1. Push this repository to GitHub.
+2. Open Render.
+3. Click `New +` -> `Blueprint`.
+4. Connect your GitHub repository.
+5. Render will detect `render.yaml` and create the web service.
+6. After deploy completes, Render will give you a public URL like:
+
+```text
+https://your-app-name.onrender.com
+```
+
+### Important limitation
+
+The current camera recognition feature is **not fully cloud-browser ready**.
+
+Why:
+
+- The app uses `cv2.VideoCapture(0)`
+- That reads the webcam of the **server machine**
+- A normal cloud host does not expose a real webcam for your users
+
+So after deployment:
+
+- Login
+- Dashboard
+- Students
+- Classes
+- Attendance reports
+
+can be hosted online,
+
+but:
+
+- live webcam capture
+- live recognition from browser camera
+
+will need code changes.
+
+### What is needed for full browser camera support
+
+To make attendance work directly from a public web link, you should change the camera flow to:
+
+- use browser webcam access with JavaScript (`getUserMedia`)
+- capture frames in the browser
+- send images or video frames to Flask API endpoints
+- run face recognition on uploaded frames on the server
+
+Without that redesign, the camera pages will only work correctly on the same machine where the app is running and where the webcam is attached.
+
 ## Common Errors
 
 ### `source venv/Scripts/activate: No such file or directory`

@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: smart-attendance-system
+    runtime: python
+    rootDir: smart_attendance_system
+    healthCheckPath: /
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    disk:
+      name: data
+      mountPath: /opt/render/project/src/smart_attendance_system/render_data
+      sizeGB: 5
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SQLALCHEMY_DATABASE_URI
+        value: sqlite:////opt/render/project/src/smart_attendance_system/render_data/instance/attendance.db
+      - key: UPLOAD_FOLDER
+        value: /opt/render/project/src/smart_attendance_system/render_data/uploads
+      - key: DATASET_FOLDER
+        value: /opt/render/project/src/smart_attendance_system/render_data/dataset/raw
+      - key: ENCODINGS_FOLDER
+        value: /opt/render/project/src/smart_attendance_system/render_data/dataset/encodings
+      - key: EXPORT_FOLDER
+        value: /opt/render/project/src/smart_attendance_system/render_data/exports/reports
