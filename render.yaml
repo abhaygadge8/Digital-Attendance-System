@@ -3,7 +3,7 @@ services:
     name: smart-attendance-system
     runtime: python
     healthCheckPath: /
-    buildCommand: pip install -r smart_attendance_system/requirements.txt
+    buildCommand: pip install -r smart_attendance_system/requirements-render.txt
     startCommand: gunicorn --chdir smart_attendance_system app:app
     envVars:
       - key: SECRET_KEY
