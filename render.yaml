@@ -5,20 +5,6 @@ services:
     healthCheckPath: /
     buildCommand: pip install -r smart_attendance_system/requirements.txt
     startCommand: gunicorn --chdir smart_attendance_system app:app
-    disk:
-      name: data
-      mountPath: /opt/render/project/src/smart_attendance_system/render_data
-      sizeGB: 5
     envVars:
       - key: SECRET_KEY
         generateValue: true
-      - key: SQLALCHEMY_DATABASE_URI
-        value: sqlite:////opt/render/project/src/smart_attendance_system/render_data/instance/attendance.db
-      - key: UPLOAD_FOLDER
-        value: /opt/render/project/src/smart_attendance_system/render_data/uploads
-      - key: DATASET_FOLDER
-        value: /opt/render/project/src/smart_attendance_system/render_data/dataset/raw
-      - key: ENCODINGS_FOLDER
-        value: /opt/render/project/src/smart_attendance_system/render_data/dataset/encodings
-      - key: EXPORT_FOLDER
-        value: /opt/render/project/src/smart_attendance_system/render_data/exports/reports
