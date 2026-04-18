@@ -1,4 +1,4 @@
-# Cloud-Based Smart Attendance System with Face Recognition
+# Smart Attendance System with Face Recognition
 
 This project is a Flask-based smart attendance system with:
 
